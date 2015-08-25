@@ -18,10 +18,7 @@ class Handler(tornado.web.RequestHandler):
     @tornado.web.asynchronous
     @tornado.gen.engine
     def get(self):
-	print(self.request.body)
-	#self.get_argument('greeting', 'Hello')
-        #response = yield tornado.gen.Task(scheduler.run, "Howdy")
-        #self.write(response)
+        print(self.request.body)
         self.finish()
 
     @tornado.gen.engine
