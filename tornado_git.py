@@ -23,8 +23,7 @@ class Handler(tornado.web.RequestHandler):
 
     @tornado.gen.engine
     def post(self):
-        response = yield tornado.gen.Task(scheduler.run, "Howdy")
-        self.write(response)
+        print(self.request.body)
         self.finish()
 
 
