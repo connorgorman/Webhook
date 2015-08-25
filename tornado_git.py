@@ -9,6 +9,7 @@ from tornado import gen
 from tornado.web import asynchronous
 from queue import Queue
 import time
+import json
 
 tornado.options.define('port', type=int, default=9000, help='server port number (default: 8888)')
 tornado.options.define('debug', type=bool, default=False, help='run in debug mode with autoreload (default: False)')
@@ -23,7 +24,8 @@ class Handler(tornado.web.RequestHandler):
 
     @tornado.gen.engine
     def post(self):
-        print(self.request.body)
+        data = json.loads(self.request.body.decode('utf-8'))
+        print(data)
         self.finish()
 
 
