@@ -1,5 +1,7 @@
 Setting up Tornado - Fresh AWS
 
+git clone repo
+
 sudo apt-get install python-dev python-pycurl python-simplejson
 sudo apt-get install python3-pip
 sudo pip install tornado
