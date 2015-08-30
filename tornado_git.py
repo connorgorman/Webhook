@@ -29,10 +29,12 @@ class Handler(tornado.web.RequestHandler):
         self.finish()
 
 
+
 class Application(tornado.web.Application):
     def __init__(self):
         handlers = [
             (r"/postreceive", Handler),
+            (r"/startup", Handler),
         ]
         settings = dict(
             static_path = os.path.join(os.path.dirname(__file__), "static"),
@@ -43,6 +45,7 @@ class Application(tornado.web.Application):
 
 def main():
     tornado.options.parse_command_line()
+    print("Server Booted")
     http_server = tornado.httpserver.HTTPServer(Application())
     http_server.listen(tornado.options.options.port)
     tornado.ioloop.IOLoop.instance().start()
