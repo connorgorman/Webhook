@@ -1,0 +1,8 @@
+Setting up Tornado - Fresh AWS
+
+sudo apt-get install python-dev python-pycurl python-simplejson
+sudo apt-get install python-pip
+sudo pip install tornado
+sudo apt-get install git
+
+Note: Default python is python 2.7 so need to say python3 explicitly

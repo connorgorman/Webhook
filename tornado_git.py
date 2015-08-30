@@ -1,5 +1,6 @@
-import os
 import threading
+import time
+import json
 import tornado.options
 import tornado.ioloop
 import tornado.httpserver
@@ -7,9 +8,6 @@ import tornado.httpclient
 import tornado.web
 from tornado import gen
 from tornado.web import asynchronous
-from queue import Queue
-import time
-import json
 
 tornado.options.define('port', type=int, default=9000, help='server port number (default: 8888)')
 tornado.options.define('debug', type=bool, default=False, help='run in debug mode with autoreload (default: False)')

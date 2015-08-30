@@ -39,7 +39,7 @@ response = client.describe_images(
         {
             'Name': 'name',
             'Values': [
-                'TESTING2',
+                'test_script',
             ]
         },
     ]
@@ -58,7 +58,7 @@ launchToken = getNewToken()
 print("Launch Token: ", launchToken)
 
 response = client.run_instances(
-    DryRun=True,
+    DryRun=False,
     ImageId=imageId,
     MinCount=1,
     MaxCount=1,
@@ -66,7 +66,7 @@ response = client.run_instances(
     SecurityGroupIds=[
         securityGroupId,
     ],
-    UserData='echo loggin in',
+    UserData='source ~/bash_startup.sh',
     InstanceType='t1.micro',
     Placement= {
         'AvailabilityZone': 'us-west-1a',
@@ -80,13 +80,8 @@ response = client.run_instances(
     ClientToken=launchToken,
 )
 
-
-
-
-
-
+print("Instance Running Response: ", response)
 quit()
-
 f = open("password.txt", "r")
 
 password = f.readlines()[0]
