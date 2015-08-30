@@ -1,8 +1,28 @@
 Setting up Tornado - Fresh AWS
 
 sudo apt-get install python-dev python-pycurl python-simplejson
-sudo apt-get install python-pip
+sudo apt-get install python3-pip
 sudo pip install tornado
 sudo apt-get install git
 
 Note: Default python is python 2.7 so need to say python3 explicitly
+
+python3 tornado_<file>.py will run the server
+
+#!/usr/bin/python3 at the top of the files that will be run with Upstart
+chmod +x tornado_<file>.py will make the file an executable
+
+create a file called tornado<file>.conf
+description "My Service"
+author "YOUR NAME HERE"
+  
+start on (local-filesystems and net-device-up)
+stop on runlevel [06]
+  
+respawn
+exec /home/ubuntu/<path>/tornado_<file>.py
+
+
+cp /home/USERNAME/myservice/myservice.conf /etc/init/myservice.conf // copy file into /etc/init
+sudo service tornado<file> start
+

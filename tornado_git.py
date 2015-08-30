@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 import os
 import threading
 import time
@@ -10,8 +12,24 @@ import tornado.web
 from tornado import gen
 from tornado.web import asynchronous
 
-tornado.options.define('port', type=int, default=9000, help='server port number (default: 8888)')
+tornado.options.define('port', type=int, default=9000, help='server port number (default: 9000)')
 tornado.options.define('debug', type=bool, default=False, help='run in debug mode with autoreload (default: False)')
+
+class Handler(tornado.web.RequestHandler):
+    
+    @tornado.web.asynchronous
+    @tornado.gen.engine
+    def get(self):
+        print(self.request.body)
+        self.write("Got a get request!")
+        self.finish()
+
+    @tornado.gen.engine
+    def post(self):
+        data = json.loads(self.request.body.decode('utf-8'))
+        print(data)
+        self.write("Got a post request!")
+        self.finish()
 
 class Handler(tornado.web.RequestHandler):
     
@@ -26,8 +44,6 @@ class Handler(tornado.web.RequestHandler):
         data = json.loads(self.request.body.decode('utf-8'))
         print(data)
         self.finish()
-
-
 
 class Application(tornado.web.Application):
     def __init__(self):
