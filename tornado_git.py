@@ -45,6 +45,7 @@ class Handler(tornado.web.RequestHandler):
     def get(self):
         print(self.request.body)
         log(str(self.request.body))
+        self.write("received")
         self.finish()
 
     @tornado.gen.engine
@@ -52,6 +53,7 @@ class Handler(tornado.web.RequestHandler):
         data = json.loads(self.request.body.decode('utf-8'))
         print(data)
         log(str(data))
+        self.write("received")
         self.finish()
 
 class Application(tornado.web.Application):
