@@ -15,7 +15,7 @@ from tornado.web import asynchronous
 tornado.options.define('port', type=int, default=9000, help='server port number (default: 9000)')
 tornado.options.define('debug', type=bool, default=False, help='run in debug mode with autoreload (default: False)')
 
-class Handler(tornado.web.RequestHandler):
+class StartupHandler(tornado.web.RequestHandler):
     
     @tornado.web.asynchronous
     @tornado.gen.engine
@@ -31,7 +31,7 @@ class Handler(tornado.web.RequestHandler):
         self.write("Got a post request!")
         self.finish()
 
-class StartupHandler(tornado.web.RequestHandler):
+class Handler(tornado.web.RequestHandler):
     
     @tornado.web.asynchronous
     @tornado.gen.engine
