@@ -31,7 +31,7 @@ class Handler(tornado.web.RequestHandler):
         self.write("Got a post request!")
         self.finish()
 
-class Handler(tornado.web.RequestHandler):
+class StartupHandler(tornado.web.RequestHandler):
     
     @tornado.web.asynchronous
     @tornado.gen.engine
@@ -49,7 +49,7 @@ class Application(tornado.web.Application):
     def __init__(self):
         handlers = [
             (r"/postreceive", Handler),
-            (r"/startup", Handler),
+            (r"/startup", StartupHandler),
         ]
         settings = dict(
             static_path = os.path.join(os.path.dirname(__file__), "static"),
