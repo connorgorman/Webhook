@@ -16,7 +16,7 @@ tornado.options.define('port', type=int, default=9000, help='server port number 
 tornado.options.define('debug', type=bool, default=False, help='run in debug mode with autoreload (default: False)')
 
 def log(logStr):
-    f = open('/home/ubuntu/Webhook/git_log.txt','w')
+    f = open('/home/ubuntu/Webhook/git_log.txt','a')
     f.write(logStr + '\n') # python will convert \n to os.linesep
     f.close() # you can omit in most cases as the destructor will call it
 
