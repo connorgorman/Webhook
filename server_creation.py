@@ -14,6 +14,7 @@ def getNewToken():
 client = boto3.client('ec2')
 
 
+
 response = client.describe_security_groups(
 	Filters=[
 		{
@@ -39,7 +40,7 @@ response = client.describe_images(
         {
             'Name': 'name',
             'Values': [
-                'test_script',
+                'git_image',
             ]
         },
     ]
@@ -81,7 +82,15 @@ response = client.run_instances(
 )
 
 print("Instance Running Response: ", response)
-quit()
+
+ec2 = boto3.resource('ec2')
+instance = ec2.Instance(response['Instances'][0]['InstanceId'])
+
+instance.wait_until_running()
+public_ip = instance.public_ip_address
+
+print("Public IP of new instance: ", public_ip)
+
 f = open("password.txt", "r")
 
 password = f.readlines()[0]
@@ -89,11 +98,9 @@ password = f.readlines()[0]
 g = Github("connorgorman", password)
 
 repo_name = "Webhook"
-
 repository = g.get_user().get_repo(repo_name)
     
-hook_name = "test"
-config = {"url": "http://example.com/webhook"}
+config = {"url": "http://" + public_ip + ":9000/postreceive"}
 events = [ "push"]
 active = True
 

@@ -28,3 +28,5 @@ exec /home/ubuntu/<path>/tornado_<file>.py
 cp /home/USERNAME/myservice/myservice.conf /etc/init/myservice.conf // copy file into /etc/init
 sudo service tornado<file> start
 
+
+
